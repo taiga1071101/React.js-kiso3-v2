@@ -1,35 +1,31 @@
-import React, { use, useState } from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate, Link } from 'react-router';
+import { useForm } from 'react-hook-form';
+import { url } from '../const';
 import { Header } from '../components/Header.jsx';
 
 export const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState({email: '', password: ''});
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const onLogin = (e) => {
-    e.preventDefault();
-
-    let valid = true;
-    let errors = {email: '', password: ''};
-
-    if (!email) {
-      errors.email = 'メールアドレスを入力してください。'
-      valid = false;
-    } else if (!email.includes('@')) {
-      errors.email = "有効なメールアドレスを入力してください。";
-      valid = false;
+  const onLogin = async (data) => {
+    try {
+      setIsSubmitting(true);
+      const { email, password } = data;
+      const requestData = { email, password };
+      const res = await axios.post(`${url}/signin`, requestData);
+      console.log('ログインに成功しました。', res);
+    } catch (err) {
+      setErrorMessage(`${err.response?.data?.ErrorMessageJP || `ログイン中にエラーが発生しました。 ${err}`}`);
+    } finally {
+      setIsSubmitting(false);
     }
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-/:-@[-`{-~]).{8,}$/;  // ?=で後続する文字列が一致するか確認。.*は任意の位置を探索可能に。
-    if (!password) {
-      errors.password = 'パスワードを入力してください。';
-      valid = false;
-    } else if (!regex.test(password)) {
-      errors.password = 'パスワードは8文字以上で、大文字小文字の英数記号を全て含んでください。';
-      valid = false;
-    }
-    setErrorMessage(errors);
   };
 
   return (
@@ -37,21 +33,41 @@ export const Login = () => {
       <Header />
       <main>
         <h1>ログイン画面</h1>
-        <form onSubmit={onLogin} noValidate>
+        <p>{errorMessage}</p>
+        <form onSubmit={handleSubmit(onLogin)} noValidate>
           <div className='m-5'>
             <label>メールアドレス</label>
-            <input type='email' value={email} onChange={handleEmailChange} />
-            <p id='email-error'>{errorMessage.email}</p>
+            <input
+              type="email"
+              {...register("email", {
+                required: "メールアドレスを入力してください。",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "有効なメールアドレスを入力してください。",
+                },
+              })}
+            />
+            <p className="error-message" id="email-error">{errors.email?.message}</p>
           </div>
 
           <div>
             <label>パスワード</label>
-            <input type='password' value={password} onChange={handlePasswordChange} />
-            <p id='password-error'>{errorMessage.password}</p>
+            <input
+              type="password"
+              {...register("password", {
+                required: "パスワードを入力してください。",
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-/:-@[-`{-~]).{8,}$/,
+                  message: "パスワードは8文字以上で、大文字小文字の英数記号を全て含んでください。",
+                },
+              })}
+            />
+            <p className="error-message" id="password-error">{errors.password?.message}</p>
           </div>
 
-          <button type='submit' id='login-button'>ログイン</button>
+          <button type='submit' id='login-button' disabled={isSubmitting}>ログイン</button>
         </form>
+        <Link to='/signup'>新規作成画面へ</Link>
       </main>
     </>
   )

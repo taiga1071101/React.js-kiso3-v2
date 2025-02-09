@@ -1,9 +1,9 @@
-import { Login } from './pages/Login.jsx';
+import { Router } from './routes/Router.jsx';
 
 function App() {
   return (
     <div>
-      <Login />
+      <Router />
     </div>
   )
 }
