@@ -38,7 +38,7 @@ export const Login = () => {
       <main>
         <h1>ログイン画面</h1>
         <form onSubmit={onLogin} noValidate>
-          <div>
+          <div className='m-5'>
             <label>メールアドレス</label>
             <input type='email' value={email} onChange={handleEmailChange} />
             <p id='email-error'>{errorMessage.email}</p>
