@@ -65,6 +65,9 @@ export const ReviewDetail = () => {
               <p className="font-bold">レビュー</p>
               <p>{review.review}</p>
             </div>
+            {
+              review.isMine && <Link to={`/edit/${review_id}`}>編集</Link>
+            }
           </div>
           <Link to='/reviewList'>一覧画面に戻る</Link>
         </main>
