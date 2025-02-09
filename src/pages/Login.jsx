@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router';
 import { useForm } from 'react-hook-form';
+import { set } from '../redux/tokenSlice.js';
 import { url } from '../const';
 import { Header } from '../components/Header.jsx';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Login = () => {
   const {
@@ -14,6 +16,10 @@ export const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const token = useSelector((state) => state.token.value);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onLogin = async (data) => {
     try {
       setIsSubmitting(true);
@@ -21,6 +27,8 @@ export const Login = () => {
       const requestData = { email, password };
       const res = await axios.post(`${url}/signin`, requestData);
       console.log('ログインに成功しました。', res);
+      dispatch(set(res.data.token));
+      navigate('/reviewList');
     } catch (err) {
       setErrorMessage(`${err.response?.data?.ErrorMessageJP || `ログイン中にエラーが発生しました。 ${err}`}`);
     } finally {

@@ -12,7 +12,7 @@ export const ReviewContent = () => {
         const res = await axios.get(`${url}/public/books?offset=${offset}`);
         setReviews(res.data);
       } catch (err) {
-        console.err(err);
+        console.error(err);
       }
     };
   
