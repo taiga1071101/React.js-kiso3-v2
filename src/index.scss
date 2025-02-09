@@ -5,16 +5,16 @@
 
   // color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
-  background-color: #e3ebc2;
+  background-color: #ffffff;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #535bf2;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #474ece;
 }
 
 body {
@@ -39,14 +39,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #646cff;
+  background-color: #2830d4;
   color: #ffffff;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #2830d4;
-  background-color: #2830d4;
+  border-color: #292FA3;
+  background-color: #292FA3;
 }
 button:focus,
 button:focus-visible {
