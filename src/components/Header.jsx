@@ -30,6 +30,7 @@ export const Header = () => {
         token ? (
           <div>
             <p>{`${userName} さん`}</p>
+            <Link to='/profile'>ユーザー情報編集</Link>
           </div>
         ) : (
           <Link to='/login'>ログイン</Link>
