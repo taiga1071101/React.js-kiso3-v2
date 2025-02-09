@@ -13,9 +13,13 @@ export const tokenSlice = createSlice({
       state.value = action.payload;
       localStorage.setItem(TOKEN_KEY, action.payload);  // トークンをlocalStrageに保存
     },
+    clear: (state) => {
+      state.value = '';
+      localStorage.removeItem(TOKEN_KEY); // トークンをlocalStarageから削除
+    }
   }
 });
 
-export const { set } = tokenSlice.actions;
+export const { set, clear } = tokenSlice.actions;
 
 export default tokenSlice.reducer;
