@@ -43,37 +43,41 @@ export const Login = () => {
         <h1>ログイン画面</h1>
         <p>{errorMessage}</p>
         <form onSubmit={handleSubmit(onLogin)} noValidate>
-          <div className='m-5'>
-            <label>メールアドレス</label>
-            <input
-              type="email"
-              {...register("email", {
-                required: "メールアドレスを入力してください。",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "有効なメールアドレスを入力してください。",
-                },
-              })}
-            />
-            <p className="error-message" id="email-error">{errors.email?.message}</p>
+          <div className='mx-100 text-left'>
+            <div className='my-5'>
+              <label>メールアドレス</label><br />
+              <input
+                className='border w-full'
+                type="email"
+                {...register("email", {
+                  required: "メールアドレスを入力してください。",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "有効なメールアドレスを入力してください。",
+                  },
+                })}
+              />
+              <p className="text-red-500" id="email-error">{errors.email?.message}</p>
+            </div>
+
+            <div className='m-5'>
+              <label>パスワード</label><br />
+              <input
+                className='border w-full'
+                type="password"
+                {...register("password", {
+                  required: "パスワードを入力してください。",
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-/:-@[-`{-~]).{8,}$/,
+                    message: "パスワードは8文字以上で、大文字小文字の英数記号を全て含んでください。",
+                  },
+                })}
+              />
+              <p className="text-red-500" id="password-error">{errors.password?.message}</p>
+            </div>
           </div>
 
-          <div>
-            <label>パスワード</label>
-            <input
-              type="password"
-              {...register("password", {
-                required: "パスワードを入力してください。",
-                pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-/:-@[-`{-~]).{8,}$/,
-                  message: "パスワードは8文字以上で、大文字小文字の英数記号を全て含んでください。",
-                },
-              })}
-            />
-            <p className="error-message" id="password-error">{errors.password?.message}</p>
-          </div>
-
-          <button type='submit' id='login-button' disabled={isSubmitting}>ログイン</button>
+          <button type='submit' id='login-button' className="my-5" disabled={isSubmitting}>ログイン</button>
         </form>
         <Link to='/signup'>新規作成画面へ</Link>
       </main>

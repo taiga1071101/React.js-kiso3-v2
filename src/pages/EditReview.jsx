@@ -44,47 +44,52 @@ export const EditReview = () => {
       <main>
         <h1>書籍レビュー編集画面</h1>
         <form onSubmit={handleSubmit(uploadReview)} className="m-10 p-5 text-left border border-black bg-sky-50">
-
           <div>
-            <label>タイトル</label>
-            <input 
-              type="text"
-              {...register("title", {
-                required: "タイトルを入力してください。"
-              })}
-            />
-            <p className="error-message">{errors.title?.message}</p>
-          </div>
+            <div className='my-5'>
+              <label>タイトル</label><br />
+              <input 
+                className='border w-full'
+                type="text"
+                {...register("title", {
+                  required: "タイトルを入力してください。"
+                })}
+              />
+              <p className="error-message">{errors.title?.message}</p>
+            </div>
 
-          <div className="my-2">
-            <label>URL：</label>
-            <input 
-              type="text"
-              {...register("url", {
-                required: "URLを入力してください。"
-              })}
-            />
-            <p className="error-message">{errors.url?.message}</p>
-          </div>
+            <div className="my-5">
+              <label>URL：</label><br />
+              <input 
+                type="text"
+                className='border w-full'
+                {...register("url", {
+                  required: "URLを入力してください。"
+                })}
+              />
+              <p className="error-message">{errors.url?.message}</p>
+            </div>
 
-          <div className="my-2">
-            <label>詳細</label>
-            <textarea 
-              {...register("detail", {
-                required: "詳細を入力してください。"
-              })}
-            />
-            <p className="error-message">{errors.detail?.message}</p>
-          </div>
+            <div className="my-5">
+              <label>詳細</label><br />
+              <textarea 
+                className='border w-full'
+                {...register("detail", {
+                  required: "詳細を入力してください。"
+                })}
+              />
+              <p className="error-message">{errors.detail?.message}</p>
+            </div>
 
-          <div className="my-2">
-            <label>レビュー</label>
-            <textarea 
-              {...register("review", {
-                required: "レビューを入力してください。"
-              })}
-            />
-            <p className="error-message">{errors.review?.message}</p>
+            <div className="my-5">
+              <label>レビュー</label><br />
+              <textarea 
+                className='border w-full'
+                {...register("review", {
+                  required: "レビューを入力してください。"
+                })}
+              />
+              <p className="error-message">{errors.review?.message}</p>
+            </div>
           </div>
 
           <button type='submit'>更新</button>

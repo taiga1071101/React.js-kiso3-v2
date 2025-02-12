@@ -22,11 +22,11 @@ export const Modal = (props) => {
   };
 
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center'>
+    <div className='fixed inset-0 bg-black/50 flex items-center justify-center'>
       <div className='bg-white p-2.5 rounded-sm'>
         <p>本当に削除しますか？</p>
-        <button onClick={closeModal}>キャンセル</button>
-        <button onClick={deleteReview}>OK</button>
+        <button onClick={closeModal} className='m-5'>キャンセル</button>
+        <button onClick={deleteReview} className='m-5'>OK</button>
       </div>
     </div>
   );

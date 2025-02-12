@@ -74,58 +74,60 @@ export const SignUp = () => {
         <h1>新規登録画面</h1>
         <p>{errorMessage}</p>
         <form onSubmit={handleSubmit(onSignUp)}>
-          <div>
-            <label>ユーザ名</label>
-            <input 
-              type="text"
-              {...register("name", {
-                required: "ユーザー名を入力してください。"
-              })}
-            />
-            <p className="error-message">{errors.name?.message}</p>
-          </div>
+          <div className='mx-100 text-left'>
+            <div>
+              <label>ユーザ名</label>
+              <input 
+                type="text"
+                {...register("name", {
+                  required: "ユーザー名を入力してください。"
+                })}
+              />
+              <p className="error-message">{errors.name?.message}</p>
+            </div>
 
-          <div>
-            <label>ユーザアイコン</label>
-            <input
-              type="file"
-              accept="image/*"
-              {...register("icon", {
-                required: "アイコンを選択してください。"
-              })}
-            />
-            <p className="error-message">{errors.icon?.message}</p>
-          </div>
+            <div>
+              <label>ユーザアイコン</label>
+              <input
+                type="file"
+                accept="image/*"
+                {...register("icon", {
+                  required: "アイコンを選択してください。"
+                })}
+              />
+              <p className="error-message">{errors.icon?.message}</p>
+            </div>
 
-          <div>
-            <label>メールアドレス</label>
-            <input
-              type="email"
-              {...register("email", {
-                required: "メールアドレスを入力してください。",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "有効なメールアドレスを入力してください。",
-                },
-              })}
-            />
-            <p className="error-message">{errors.email?.message}</p>
-          </div>
+            <div>
+              <label>メールアドレス</label>
+              <input
+                type="email"
+                {...register("email", {
+                  required: "メールアドレスを入力してください。",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "有効なメールアドレスを入力してください。",
+                  },
+                })}
+              />
+              <p className="error-message">{errors.email?.message}</p>
+            </div>
 
-          <div>
-            <label>パスワード</label>
-            <input
-              type="password"
-              {...register("password", {
-                required: "パスワードを入力してください。",
-                pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-/:-@[-`{-~]).{8,}$/,
-                  message: "パスワードは8文字以上で、大文字小文字の英数記号を全て含んでください。",
-                },
-              })}
-            />
-            <br />
-            <p className="error-message">{errors.password?.message}</p>
+            <div>
+              <label>パスワード</label>
+              <input
+                type="password"
+                {...register("password", {
+                  required: "パスワードを入力してください。",
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-/:-@[-`{-~]).{8,}$/,
+                    message: "パスワードは8文字以上で、大文字小文字の英数記号を全て含んでください。",
+                  },
+                })}
+              />
+              <br />
+              <p className="error-message">{errors.password?.message}</p>
+            </div>
           </div>
 
           <button type='submit' disabled={isSubmitting} >新規登録</button>

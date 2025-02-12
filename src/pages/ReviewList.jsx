@@ -23,11 +23,11 @@ export const ReviewList = () => {
         <h1>書籍一覧画面</h1>
         <ReviewContent />
         <div>
-          <button onClick={nextList}>次へ</button>
+          <button onClick={nextList} className='mx-2'>次へ</button>
           <span>{offset + 1}～{offset + 10}</span>
-          <button onClick={preList}>前へ</button>
+          <button onClick={preList} className='mx-2'>前へ</button>
         </div>
-        <div>
+        <div className='my-5'>
           <Link to='/new'>書籍レビュー投稿画面へ</Link>
         </div>
       </main>
