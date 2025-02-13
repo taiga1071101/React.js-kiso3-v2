@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import { url } from '../const.js';
 
 export const ReviewContent = () => {
@@ -13,7 +13,7 @@ export const ReviewContent = () => {
   
     const displayReviewList = async () => {
       try {
-        const res = await axios.get(`${url}/public/books?offset=${offset}`);
+        const res = await axios.get(`${url}/books?offset=${offset}`, {headers: headers});
         setReviews(res.data);
       } catch (err) {
         console.error(err);
@@ -42,12 +42,16 @@ export const ReviewContent = () => {
     <ul className='mx-40 my-10'>
       {
         reviews.map(review => {
+          console.log(review)
           return (
-            <li key={review.id} onClick={() => transitionToDetail(review.id)} className='p-2 border border-black cursor-pointer hover:bg-gray-100'>
-              {review.title}
+            <li key={review.id} className='p-2 border border-black cursor-pointer hover:bg-gray-100'>
+              <p  onClick={() => transitionToDetail(review.id)}>{review.title}</p>
+              { review.isMine && <Link to={`/edit/${review.id}`}>編集</Link> }
+              
             </li>
           )
         })
+        
       }
     </ul>
   )
